@@ -1,0 +1,108 @@
+/* Estilos generales del cuerpo */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000; /* Fondo oscuro por defecto */
+}
+
+/* Estilos del fondo del bosque */
+#forest {
+    position: fixed; /* Fija el fondo para que no se mueva con el scroll */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://i.pinimg.com/736x/dc/d4/cf/dcd4cfadbd7e848e5b1eeeafb2ab01f4.jpg') no-repeat center center;
+    background-size: cover; /* Asegura que la imagen cubra toda el área */
+    filter: brightness(0.6) contrast(1.2); /* Ajusta el brillo y el contraste para integrar mejor el tablero */
+    z-index: -1; /* Envía el fondo detrás de otros elementos */
+    transition: filter 0.3s ease; /* Transición suave para los cambios de filtro */
+}
+
+/* Estilos del contenedor principal */
+#container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px; /* Ajusta la perspectiva para el efecto 3D */
+    overflow: hidden;
+    z-index: 0; /* Asegura que el contenedor esté detrás del tablero */
+}
+
+/* Estilos del tablero Ouija */
+#ouija-board {
+    position: absolute;
+    bottom: 20px; /* Ajusta la distancia del borde inferior */
+    left: 50%; /* Centra el tablero horizontalmente */
+    transform: translateX(-50%) translateY(0) translateZ(0) rotateX(90deg); /* Inclina el tablero hacia el cielo */
+    width: 250px; /* Tamaño del tablero ajustado */
+    height: 180px; /* Tamaño del tablero ajustado */
+    background: url('https://i.pinimg.com/736x/e7/1b/84/e71b844d7e229680319cfd0e1f41adbb.jpg') no-repeat center center;
+    background-size: cover; /* Ajusta la imagen para cubrir toda el área */
+    z-index: 10;
+    border: 2px solid #291c19; /* Borde marrón oscuro más delgado */
+    border-radius: 5px; /* Bordes redondeados (opcional) */
+    box-shadow: 
+        0 12px 24px rgba(29, 26, 26, 0.8), /* Sombra externa para mayor profundidad */
+        inset 0 6px 12px rgba(68, 50, 50, 0.5); /* Sombra interna para mayor efecto de relieve */
+    filter: brightness(0.75) contrast(1.1); /* Ajusta el brillo y el contraste del tablero para que se integre mejor */
+    transform-style: preserve-3d; /* Mantiene el efecto 3D del tablero */
+    transition: transform 2s ease-in-out; /* Transición suave para el movimiento */
+    cursor: pointer; /* Cambia el cursor cuando se pasa sobre el tablero */
+}
+
+/* Animación de flotación, acercamiento y escalado del tablero Ouija */
+@keyframes floatAndApproach {
+    0% {
+        transform: translateX(-50%) translateY(0) translateZ(0) rotateX(90deg) scale(1); /* Estado inicial */
+    }
+    100% {
+        transform: translateX(-50%) translateY(-30vh) translateZ(-300px) rotateX(0deg) scale(1.5); /* Posición final con inclinación, acercamiento y escalado */
+    }
+}
+
+/* Aplica la animación al tablero cuando tenga la clase 'floating' */
+#ouija-board.floating {
+    animation: floatAndApproach 2s forwards; /* Animación de 2 segundos que se detiene en la posición final */
+}
+
+/* Estilo para el campo de texto dentro del tablero Ouija */
+#ouija-board input {
+    display: none; /* Oculta el campo de texto inicialmente */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/* Estilo para la sobreposición de imágenes */
+#overlay-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Permite interactuar con elementos debajo */
+    z-index: 20; /* Asegura que las imágenes estén encima del tablero */
+}
+
+.overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25; /* Asegura que la imagen esté encima del tablero */
+}
+
+.overlay-image img {
+    max-width: 80%;
+    max-height: 80%;
+}
